@@ -175,7 +175,7 @@ function SceneContent() {
 
     return (
         <>
-            <Environment map={envMap} background />
+            <Environment map={envMap} />
             <Model envMap={envMap} />
             <ContactShadows
                 position={[0, -1.5, 0]}
