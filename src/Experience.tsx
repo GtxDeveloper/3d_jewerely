@@ -1,7 +1,7 @@
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Environment } from '@react-three/drei';
 import { Suspense } from 'react';
-import { RingModel } from './components/RingModel';
+
 
 export function Experience() {
     return (
@@ -15,7 +15,7 @@ export function Experience() {
                     files="/hdr/brown_photostudio_02_4k.exr"
                     background
                 />
-                <RingModel />
+
             </Suspense>
             <OrbitControls makeDefault />
         </Canvas>

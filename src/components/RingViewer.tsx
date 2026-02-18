@@ -6,8 +6,7 @@ import {
     useGLTF,
     useEnvironment,
     MeshRefractionMaterial,
-    ContactShadows,
-    Bvh,
+    ContactShadows
 } from '@react-three/drei';
 import * as THREE from 'three';
 import type { GLTF } from 'three-stdlib';
