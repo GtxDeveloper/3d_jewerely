@@ -13,7 +13,7 @@ import type { GLTF } from 'three-stdlib';
 
 // ─── Asset Paths ───────────────────────────────────────────────────────────────
 const MODEL_PATH = '/3d_models/Ring_Raw.glb';
-const HDR_PATH = '/hdr/brown_photostudio_02_4k.exr';
+const HDR_PATH = '/hdr/brown_photostudio_02_4k_copy.exr';
 
 // ─── Types ──────────────────────────────────────────────────────────────────────
 type GLTFResult = GLTF & {
