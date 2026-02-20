@@ -77,65 +77,42 @@ function Ring({ node, envMap }: { node: THREE.Mesh; envMap: THREE.Texture }) {
 }
 
 // ─── Diamond ──────────────────────────────────────────────────────────────────
-function Diamond({ node, envMap }: { node: THREE.Mesh; envMap: THREE.Texture }) {
+export function Diamond({ node, envMap }: { node: THREE.Mesh; envMap: THREE.Texture }) {
     const meshRef = useRef<THREE.Mesh>(null!);
 
-    // ─── ГЕОМЕТРИЯ ────────────────────────────────────────────────────────
-    const geometry = useMemo(() => {
-        const geo = node.geometry.clone();
-        // Превращаем в Flat Shading (Острые грани)
-        const flatGeo = geo.toNonIndexed();
-        flatGeo.computeVertexNormals();
-        return flatGeo;
-    }, [node.geometry]);
-
     // ─── ПОЗИЦИОНИРОВАНИЕ ─────────────────────────────────────────────────
-    // Если алмаз улетает, лучше использовать <primitive object={node} /> 
-    // вместо создания нового меша. Но если нужен этот способ:
     useLayoutEffect(() => {
+
+        if (!node.geometry.attributes.normal) {
+            node.geometry.computeVertexNormals();
+        }
+
         if (meshRef.current) {
             // Копируем трансформации из исходного узла
             meshRef.current.position.copy(node.position);
             meshRef.current.rotation.copy(node.rotation);
             meshRef.current.scale.copy(node.scale);
-
-            // Если у узла есть родители, нужно копировать world matrix, 
-            // но проще просто скопировать локальные, если иерархия простая.
         }
     }, [node]);
 
     return (
         <group>
-            {/* Реальный алмаз из GLB */}
+            {/* Реальный алмаз из GLB с оригинальной геометрией */}
             <mesh
                 ref={meshRef}
-                geometry={geometry}
+                geometry={node.geometry}
                 castShadow
-            // receiveShadow // Алмазы обычно не принимают тени, они их преломляют
             >
-                <MeshRefractionMaterial
-                    envMap={envMap}
-                    bounces={2}
-                    ior={2.4}
-                    aberrationStrength={0.02}
-                    color="#E0E5E9"
-                    fastChroma={true}
-                    side={THREE.DoubleSide}
-                />
-            </mesh>
-
-            {/* Дебаг (справа) */}
-            {/* <mesh position={[2, 0, 0]} castShadow>
-                <icosahedronGeometry args={[0.5, 0]} />
                 <MeshRefractionMaterial
                     envMap={envMap}
                     bounces={3}
                     ior={2.4}
-                    aberrationStrength={0.03}
+                    aberrationStrength={0.02}
                     color="white"
                     fastChroma={true}
+                    side={THREE.DoubleSide}
                 />
-            </mesh> */}
+            </mesh>
         </group>
     );
 }

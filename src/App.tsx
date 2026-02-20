@@ -40,8 +40,8 @@ function Nav() {
         zIndex: 1000,
       }}
     >
-      <button {...btn('Ring Viewer', '/')}>💍 Ring Viewer</button>
-      <button {...btn('Debug Lab', '/debug')}>🧪 Debug Lab</button>
+      <button {...btn('Ring Viewer', '/')}>Ring Viewer</button>
+      <button {...btn('Debug Lab', '/debug')}>Debug Lab</button>
     </div>
   );
 }

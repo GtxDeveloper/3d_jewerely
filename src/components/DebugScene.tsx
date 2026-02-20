@@ -8,7 +8,7 @@ import {
 } from '@react-three/drei';
 import * as THREE from 'three';
 
-const HDR_PATH = '/hdr/brown_photostudio_02_4k.exr';
+const HDR_PATH = '/hdr/brown_photostudio_02_4k_copy.exr';
 
 function SceneContent() {
     const envMap = useEnvironment({ files: HDR_PATH });
